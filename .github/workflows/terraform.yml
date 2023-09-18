@@ -21,4 +21,4 @@ jobs:
       - name: format
         run: terraform fmt -check
       - name: plan
-        run: terraform planS
+        run: terraform plan
