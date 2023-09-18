@@ -12,12 +12,14 @@ provider "aws" {
   region = "us-east-1"
 }
 
+/*
   backend "s3" {
     bucket = "bootcamp32-quadri-74"
     key    = "ec2/terraform.tfstate"
     region = "us-east-1"
 
   }
+*/
 
 resource "aws_instance" "ec2" {
   ami           = data.aws_ami.amzlinux2.id
