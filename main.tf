@@ -1,5 +1,5 @@
 module "s3" {
-  source = "git@github.com:quadribello/Infra_Project.git//s3-module?ref=v1.1.0"
+  source = "git@github.com:quadribello/Infra_Project.git//s3-module?ref=v1.2.0"
   env    = "dev"
 }
 
@@ -12,14 +12,14 @@ terraform {
     }
   }
 
+  provider "aws" {
+    region = "us-east-1"
+  }
+
   backend "s3" {
     bucket  = "bootcamp32-dev-13"
     region  = "us-east-1"
     key     = "action/terraform.tfstate"
     encrypt = true
   }
-}
-
-provider "aws" {
-  region = "us-east-1"
 }
