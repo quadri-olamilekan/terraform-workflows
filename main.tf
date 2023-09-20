@@ -8,4 +8,5 @@ backend "s3" {
   bucket = "bootcamp32-dev-47"
   key    = "action/terraform.tfstate"
   region = "us-east-1"
+  encrypt = true
 }
