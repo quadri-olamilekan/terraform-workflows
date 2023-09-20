@@ -12,14 +12,14 @@ terraform {
     }
   }
 
-  provider "aws" {
-    region = "us-east-1"
-  }
-
   backend "s3" {
     bucket  = "bootcamp32-dev-13"
     region  = "us-east-1"
     key     = "action/terraform.tfstate"
     encrypt = true
   }
+}
+
+provider "aws" {
+  region = "us-east-1"
 }
