@@ -22,3 +22,5 @@ jobs:
         run: terraform fmt -check
       - name: plan
         run: terraform plan
+      - name: apply
+        run: terraform apply -auto-approve
