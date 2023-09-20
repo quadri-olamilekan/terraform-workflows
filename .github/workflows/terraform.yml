@@ -18,6 +18,7 @@ jobs:
         run: |
              eval `ssh-agent -s`
              echo "${{ secrets.TERRAFORM_WORKFLOWS }}" | ssh-add -
+             terraform init
       - name: validate
         run: terraform validate
       - name: format
