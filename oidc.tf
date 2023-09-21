@@ -6,14 +6,18 @@ terraform {
       version = "~> 5.0"
     }
   }
-}
 
   backend "s3" {
     bucket  = "bootcamp32-dev-47"
     region  = "us-east-1"
-    key     = "action/oidc/terraform.tfstate"
+    key     = "action/terraform.tfstate"
     encrypt = true
   }
+}
+
+provider "aws" {
+  region = "us-east-1"
+}
 
 # OIDC for git actions
 data "tls_certificate" "eks" {
@@ -77,8 +81,4 @@ resource "aws_iam_role_policy_attachment" "git_actions_oidc_attachment" {
 
 output "git_actions_oidc" {
   value = aws_iam_role.git_action.arn
-}
-
-provider "aws" {
-  region = "us-east-1"
 }
