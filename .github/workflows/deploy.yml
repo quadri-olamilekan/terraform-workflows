@@ -34,7 +34,8 @@ jobs:
         run: terraform fmt -check
       - name: init
         run: |
-          eval $(ssh-agent -s)
+          eval `ssh-agent -k`
+          eval `ssh-agent -s`
           echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> $GITHUB_ENV
           echo "$TERRAFORM_WORKFLOW" | base64 -d | ssh-add -
           terraform init
