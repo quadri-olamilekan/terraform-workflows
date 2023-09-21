@@ -12,7 +12,7 @@ on:
     secrets:
       CI_ROLE:
         required: true
-      SSH_KEY_GITHUB_ACTIONS:
+      TERRAFORM_WORKFLOW:
         required: true
 
 jobs:
