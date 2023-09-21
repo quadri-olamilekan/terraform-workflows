@@ -1,4 +1,4 @@
-name: oidc
+name: s3 Deploy
 on:
   workflow_dispatch:
 
@@ -10,10 +10,11 @@ permissions:
   contents: read
 
 jobs:
-  call-eks-workflow:
+  call-vpc-workflow:
     uses: ./.github/workflows/deploy.yml
     with:
-      work-dir: "./"
+      work-dir: "./s3-module"
       aws-region: "us-east-1"
     secrets:
       CI_ROLE: ${{ secrets.CI_ROLE }}
+      SSH_KEY_GITHUB_ACTIONS: ${{ secrets.SSH_KEY_GITHUB_ACTIONS  }}
