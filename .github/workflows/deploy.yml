@@ -33,10 +33,10 @@ jobs:
       - name: Terraform format
         run: terraform fmt -check
       - name: init
-        run: |
-             eval `ssh-agent -s`
-             echo "${{ secrets.TERRAFORM_WORKFLOWS }}" | ssh-add -
-             terraform init
+        run: terraform init
+#   eval `ssh-agent -s`
+#   echo "${{ secrets.TERRAFORM_WORKFLOWS }}" | ssh-add -
+             
       - name: Validate
         run: terraform validate
       - name: Plan
