@@ -34,7 +34,7 @@ jobs:
         run: terraform fmt -check
       - name: init
         run: |
-          eval `ssh-agent -s`
+          eval "$(ssh-agent -s)"
           ssh-add - <<< '${{ secrets.TERRAFORM_WORKFLOW}}'
           terraform init
       - name: Validate
