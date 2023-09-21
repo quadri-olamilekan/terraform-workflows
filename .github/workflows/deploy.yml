@@ -34,7 +34,6 @@ jobs:
         run: terraform fmt -check
       - name: init
         run: |
-          eval $(ssh-agent -l)
           eval $(ssh-agent -k)
           eval $(ssh-agent -s)
           echo "$TERRAFORM_WORKFLOW" | ssh-add -
