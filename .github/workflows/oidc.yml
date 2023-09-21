@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  call-eks-workflow:
+  call-oidc-workflow:
     uses: ./.github/workflows/deploy.yml
     with:
       work-dir: "./"
