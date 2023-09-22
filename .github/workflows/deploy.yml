@@ -12,7 +12,7 @@ on:
     secrets:
       CI_ROLE:
         required: true
-      TERRAFORM_WORKFLOW:
+      TERRAFORM_WORKFLOWS:
         required: true
 
 jobs:
@@ -31,15 +31,15 @@ jobs:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2
       - name: Terraform format
-        run: terraform fmt -check
+        run:  terraform fmt -check
       - name: init
         run: |
-          eval `ssh-agent -s`
-          ssh-add - <<< "${{ secrets.TERRAFORM_WORKFLOWS }}"
-          terraform init  
+              eval `ssh-agent -s`
+              echo "${{ secrets.TERRAFORM_WORKFLOWS }}" | ssh-add -
+              terraform init  
       - name: Validate
-        run: terraform validate
+        run:  terraform validate
       - name: Plan
-        run: terraform plan
+        run:  terraform plan
      # - name: Apply
        # run: terraform apply -auto-approve

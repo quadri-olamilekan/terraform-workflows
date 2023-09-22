@@ -17,4 +17,4 @@ jobs:
       aws-region: "us-east-1"
     secrets:
       CI_ROLE: ${{ secrets.CI_ROLE }}
-      TERRAFORM_WORKFLOW: ${{ secrets.TERRAFORM_WORKFLOWS  }}
+      TERRAFORM_WORKFLOWS: ${{ secrets.TERRAFORM_WORKFLOWS  }}
