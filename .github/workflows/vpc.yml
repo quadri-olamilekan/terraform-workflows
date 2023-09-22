@@ -1,0 +1,20 @@
+name: s3 Deploy
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  pull-requests: write
+  statuses: write
+  actions: read
+  contents: read
+
+jobs:
+  call-s3-workflow:
+    uses: ./.github/workflows/deploy.yml
+    with:
+      work-dir: "./environments/vpc-module"
+      aws-region: "us-east-1"
+    secrets:
+      CI_ROLE: ${{ secrets.CI_ROLE }}
+      TERRAFORM_WORKFLOWS: ${{ secrets.TERRAFORM_WORKFLOWS  }}
