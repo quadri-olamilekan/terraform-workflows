@@ -13,7 +13,7 @@ jobs:
   call-oidc-workflow:
     uses: ./.github/workflows/deploy.yml
     with:
-      work-dir: "./"
+      work-dir: "./environments/oidc-module"
       aws-region: "us-east-1"
     secrets:
       CI_ROLE: ${{ secrets.CI_ROLE }}
