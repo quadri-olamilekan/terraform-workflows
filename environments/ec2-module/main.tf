@@ -5,6 +5,6 @@ module "ec2_instance" {
   instance_count   = 1
   my_instance_type = "t2.micro"
   name             = "dev_ec2"
-  vpc_id           = "vpc-0cfa9ec057c61f848"
+  vpc_id           = data.terraform_remote_state.vpc.outputs.vpc_id
   my_key           = "demo32"
 }

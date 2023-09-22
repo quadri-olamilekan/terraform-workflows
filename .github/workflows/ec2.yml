@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  call-s3-workflow:
+  call-ec2-workflow:
     uses: ./.github/workflows/deploy.yml
     with:
       work-dir: "./environments/ec2-module"
