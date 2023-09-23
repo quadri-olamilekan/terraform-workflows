@@ -1,6 +1,6 @@
 module "ec2_instance" {
- # source = "git@github.com:quadribello/Infra_Project.git//ec2-module?ref=v1.4.2"
-   source           = "git::https://github.com/quadribello/Infra_Project.git//ec2-module?ref=v1.4.3"
+  # source = "git@github.com:quadribello/Infra_Project.git//ec2-module?ref=v1.4.2"
+  source           = "git::https://github.com/quadribello/Infra_Project.git//ec2-module?ref=v1.4.3"
   region           = "us-east-1"
   instance_count   = 1
   vpc_id           = data.terraform_remote_state.vpc.outputs.vpc_id
