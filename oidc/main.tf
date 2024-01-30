@@ -1,13 +1,8 @@
 # OIDC for git actions
-data "tls_certificate" "eks" {
-  url = "https://token.actions.githubusercontent.com"
+data "aws_iam_openid_connect_provider" "git" {
+  url = var.url  # Replace with the actual URL of your existing provider
 }
 
-resource "aws_iam_openid_connect_provider" "git" {
-  client_id_list  = ["sts.amazonaws.com"]
-  thumbprint_list = [data.tls_certificate.eks.certificates[0].sha1_fingerprint]
-  url             = "https://token.actions.githubusercontent.com"
-}
 
 # Role to be assumed with a federated principal
 data "aws_iam_policy_document" "git_aws_oidc" {
@@ -17,19 +12,19 @@ data "aws_iam_policy_document" "git_aws_oidc" {
 
     condition {
       test     = "StringEquals"
-      variable = "${replace(aws_iam_openid_connect_provider.git.url, "https://", "")}:aud"
+      variable = "${replace(data.aws_iam_openid_connect_provider.git.url, "https://", "")}:aud"
       values   = ["sts.amazonaws.com"]
     }
 
     condition {
       test     = "StringLike"
-      variable = "${replace(aws_iam_openid_connect_provider.git.url, "https://", "")}:sub"
-      values   = ["repo:BellyBista/*:*"]
+      variable = "${replace(data.aws_iam_openid_connect_provider.git.url, "https://", "")}:sub"
+      values   = ["repo:quadri-olamilekan/*:*"]
     }
 
 
     principals {
-      identifiers = [aws_iam_openid_connect_provider.git.arn]
+      identifiers = [data.aws_iam_openid_connect_provider.git.arn]
       type        = "Federated"
     }
   }
@@ -37,11 +32,11 @@ data "aws_iam_policy_document" "git_aws_oidc" {
 
 resource "aws_iam_role" "git_action" {
   assume_role_policy = data.aws_iam_policy_document.git_aws_oidc.json
-  name               = "git-actions-oidc"
+  name               = "eks-iam-roles-repo"
 }
 
 resource "aws_iam_policy" "git_action" {
-  name = "git-actions-oidc"
+  name = "eks-iam-roles-repo"
 
   policy = jsonencode({
     Statement = [{
@@ -56,8 +51,4 @@ resource "aws_iam_policy" "git_action" {
 resource "aws_iam_role_policy_attachment" "git_actions_oidc_attachment" {
   role       = aws_iam_role.git_action.name
   policy_arn = aws_iam_policy.git_action.arn
-}
-
-output "git_actions_oidc" {
-  value = aws_iam_role.git_action.arn
 }
